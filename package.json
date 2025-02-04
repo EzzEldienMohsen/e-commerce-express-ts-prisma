@@ -9,7 +9,8 @@
     "prisma:push": "prisma db push",
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
-    "prisma:seed": "ts-node prisma/seed.ts"
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "prisma:seed:prod": "ts-node -r dotenv/config prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.3.0",

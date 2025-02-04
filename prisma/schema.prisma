@@ -16,3 +16,91 @@ generator client {
   output = "../generated/prisma_client"
 
 }
+
+model Products {
+  id BigInt @id @default(autoincrement()) @unique
+  img String 
+  name String
+  type String
+  price Float
+  cat String
+
+// ignored relations for the prisma bidirection 
+  Cart_products Cart_products[] @ignore
+  Wishlist_items Wishlist_items[] @ignore
+}
+
+model ClientUser {
+  id            BigInt  @id @default(autoincrement())
+  f_name        String
+  l_name        String
+  email         String  @unique
+  phone         String  @unique
+  main_address  String?
+  password      String
+  token         String?
+  gender        String?
+  date_of_birth DateTime?
+  nationality   String?
+  avatar_url    String?
+  bio           String?
+
+// ignored relations for the prisma bidirection 
+  Client_address Client_address[] @ignore
+  Cart Cart[] @ignore
+  Wishlist Wishlist[] @ignore
+}
+
+model Client_address {
+  id              BigInt  @id @default(autoincrement())
+  address_name    String
+  address_details String
+  client_id       BigInt
+  client          ClientUser @relation(fields: [client_id], references: [id], onDelete: Cascade) 
+}
+
+model Cart {
+  id BigInt @id @default(autoincrement())
+  client_id BigInt 
+  total_price Float @default(0)
+  taxes Float @default(0.05)
+  sub_total Float @default(0)
+  client ClientUser @relation(fields: [client_id],references: [id],onDelete: Cascade)
+  Cart_products Cart_products[]
+}
+
+model Cart_products {
+  id BigInt @id @default(autoincrement())
+  img String 
+  name String
+  type String
+  price Float
+  cat String
+  amout Int @default(1)
+  product_id BigInt
+  product Products @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  cart_id BigInt
+  cart Cart @relation(fields: [cart_id],references: [id],onDelete: Cascade)
+}
+
+model Wishlist {
+  id BigInt @id @default(autoincrement())
+  client_id BigInt
+  client ClientUser @relation(fields: [client_id],references: [id],onDelete: Cascade)
+  Wishlist_items Wishlist_items[]
+}
+model Wishlist_items {
+  id BigInt @id @default(autoincrement())
+  wishlidt_id BigInt
+  product_id BigInt
+  wishlist Wishlist @relation(fields: [wishlidt_id], references: [id],onDelete: Cascade)
+  products Products @relation(fields: [product_id], references: [id], onDelete: Cascade)
+}
+
+model Contact {
+   id BigInt @id @default(autoincrement())
+   name String
+   email String
+   phone String
+   message String
+}
