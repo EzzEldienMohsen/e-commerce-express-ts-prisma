@@ -2,7 +2,7 @@
   "name": "express-ts-prisma",
   "version": "1.0.0",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only app.ts",
+    "dev": "nodemon --exec ts-node -r dotenv/config app.ts",
     "build": "tsc",
     "start": "node dist/app.js",
     "prisma:init": "prisma migrate dev --name init",
