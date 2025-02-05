@@ -7,6 +7,7 @@ import {
   productsRouter,
   profileRouter,
   signUpRouter,
+  wishlistRouter,
 } from './controllers';
 const app = express();
 
@@ -19,5 +20,5 @@ app.use('/api/v1/login', loginRouter);
 app.use('/api/v1/logout', logOutRouter);
 app.use('/api/v1/profile', profileRouter);
 app.use('/api/v1/address', addressRouter);
-
+app.use('/api/v1/wishlist', wishlistRouter);
 app.listen(port, () => console.log(`Server is listening on port: ${port}`));

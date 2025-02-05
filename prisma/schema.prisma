@@ -61,7 +61,7 @@ model Client_address {
 
 model Cart {
   id BigInt @id @default(autoincrement())
-  client_id BigInt 
+  client_id BigInt  @unique
   total_price Float @default(0)
   taxes Float @default(0.05)
   sub_total Float @default(0)
@@ -85,7 +85,7 @@ model Cart_products {
 
 model Wishlist {
   id BigInt @id @default(autoincrement())
-  client_id BigInt
+  client_id BigInt @unique
   client ClientUser @relation(fields: [client_id],references: [id],onDelete: Cascade)
   Wishlist_items Wishlist_items[]
 }
