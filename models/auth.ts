@@ -120,10 +120,10 @@ export const logOutUser = async (
 ): Promise<void> => {
   try {
     const customRequest = req as CustomRequest;
-    const userId = customRequest.userId as number;
+    const userId = customRequest.userId;
 
     await prisma.clientUser.update({
-      where: { id: userId },
+      where: { id: serializeBigInt(userId) },
       data: { token: '' },
     });
 
