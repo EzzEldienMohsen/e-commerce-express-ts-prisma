@@ -13,18 +13,15 @@ export const authenticate = async (
 ): Promise<void> => {
   let token: string | undefined;
 
-  // Check for token in the Authorization header
   const authHeader = req.headers.authorization;
   if (authHeader && authHeader.startsWith('Bearer ')) {
     token = authHeader.split(' ')[1];
   }
 
-  // If no token in header, check cookies
   if (!token && req.cookies?.token) {
     token = req.cookies.token;
   }
 
-  // If no token is found, return a 401 error
   if (!token) {
     res
       .status(401)
@@ -33,7 +30,6 @@ export const authenticate = async (
   }
 
   try {
-    // Verify the token using jwt.verify
     const decoded = verifyToken(token);
 
     // Ensure the decoded token is valid and contains a userId
@@ -44,13 +40,10 @@ export const authenticate = async (
       return;
     }
 
-    // Perform an additional check: fetch the user from the database
-    // and verify that the token matches the one stored for that user.
     const user = await prisma.clientUser.findUnique({
       where: { id: Number(decoded.userId) },
     });
 
-    // If no user is found or the token does not match, reject the request.
     if (!user || user.token !== token) {
       res
         .status(403)
@@ -58,10 +51,8 @@ export const authenticate = async (
       return;
     }
 
-    // Token is valid and matches the DB record—attach userId to the request
     req.userId = decoded.userId;
 
-    // Proceed to the next middleware or route handler
     next();
   } catch (error) {
     res.status(403).json({ success: false, error: 'Invalid or expired token' });

@@ -1,6 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
 import {
+  addressRouter,
   logOutRouter,
   loginRouter,
   productsRouter,
@@ -17,5 +18,6 @@ app.use('/api/v1/sign-up', signUpRouter);
 app.use('/api/v1/login', loginRouter);
 app.use('/api/v1/logout', logOutRouter);
 app.use('/api/v1/profile', profileRouter);
+app.use('/api/v1/address', addressRouter);
 
 app.listen(port, () => console.log(`Server is listening on port: ${port}`));
