@@ -1,5 +1,7 @@
 // Types for the Database Tables
 
+import { Request } from 'express';
+
 // Type for the `products` table
 export type Products = {
   id: number;
@@ -147,3 +149,7 @@ export type WishlistItem = {
 
 // wishList Type
 export type Wishlist = { id: number; client_id: number };
+
+export interface CustomRequest extends Request {
+  userId?: number | undefined | null;
+}
