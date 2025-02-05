@@ -6,7 +6,7 @@ import { z } from 'zod';
 export const messageSchema = z.object({
   name: z
     .string()
-    .min(4, 'Name must be at least 4 characters long')
+    .min(3, 'Name must be at least 3 characters long')
     .trim()
     .nonempty('Name field is required'),
   phone: z
