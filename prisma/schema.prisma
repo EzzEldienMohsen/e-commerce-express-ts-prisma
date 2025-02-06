@@ -76,7 +76,7 @@ model Cart_products {
   type String
   price Float
   cat String
-  amout Int @default(1)
+  amount Int @default(1)
   product_id BigInt
   product Products @relation(fields: [product_id], references: [id], onDelete: Cascade)
   cart_id BigInt

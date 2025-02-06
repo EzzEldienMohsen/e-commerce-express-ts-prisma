@@ -6,3 +6,4 @@ export { default as profileRouter } from './profileRouter';
 export { default as addressRouter } from './addressRouter';
 export { default as wishlistRouter } from './wishlistRouter';
 export { default as contactRouter } from './contactRouter';
+export { default as cartRouter } from './cartRouter';

@@ -2,6 +2,7 @@ import express from 'express';
 import 'dotenv/config';
 import {
   addressRouter,
+  cartRouter,
   contactRouter,
   logOutRouter,
   loginRouter,
@@ -24,6 +25,7 @@ app.use('/api/v1/profile', profileRouter);
 app.use('/api/v1/address', addressRouter);
 app.use('/api/v1/wishlist', wishlistRouter);
 app.use('/api/v1/contact', contactRouter);
+app.use('/api/v1/cart', cartRouter);
 
 // not found module
 app.use(notFound);

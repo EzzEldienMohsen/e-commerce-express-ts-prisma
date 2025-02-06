@@ -56,14 +56,14 @@ export type Cart = {
 
 // Type for the `cart_products` table
 export type CartProduct = {
-  id: number;
+  id: bigint;
   img: string;
   name: string;
   type: string;
   price: number;
   cat: string;
-  cart_id: number;
-  product_id: number;
+  cart_id: bigint;
+  product_id: bigint;
   amount: number;
 };
 
